@@ -1,4 +1,5 @@
 import useWindowSize from '../hooks/useWindowSize'
+import AnimateOnScroll from './AnimateOnScroll'
 
 function ServiceCard({ card }) {
   const handleEnter = (e) => {
@@ -57,7 +58,8 @@ export default function Services() {
       padding: isMobile ? '80px 24px' : '110px 64px',
       background: `radial-gradient(circle at 15% 15%, rgba(82,216,11,0.055), transparent 30%), #07100B`,
     }}>
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <AnimateOnScroll>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <div style={{
           display: 'inline-block',
           background: 'linear-gradient(135deg, rgba(88,220,14,0.12), rgba(120,245,27,0.035))',
@@ -79,13 +81,18 @@ export default function Services() {
         <p style={{ color: '#8A9B8D', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '420px', margin: '0 auto' }}>
           Everything you need to go from confused to consistent — in one place.
         </p>
-      </div>
+        </div>
+      </AnimateOnScroll>
       <div style={{
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(260px, 1fr))',
         gap: '20px', maxWidth: '1100px', margin: '0 auto',
       }}>
-        {cards.map(card => <ServiceCard key={card.title} card={card} />)}
+        {cards.map((card, index) => (
+          <AnimateOnScroll key={card.title} delay={0.1 * (index + 1)}>
+            <ServiceCard card={card} />
+          </AnimateOnScroll>
+        ))}
       </div>
     </section>
   )

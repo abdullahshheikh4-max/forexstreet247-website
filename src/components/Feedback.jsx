@@ -1,4 +1,7 @@
+import { useCallback, useEffect, useRef } from 'react'
+import { motion, useAnimationControls, useMotionValue, useTransform } from 'framer-motion'
 import useWindowSize from '../hooks/useWindowSize'
+import AnimateOnScroll from './AnimateOnScroll'
 
 function FeedbackCard({ stars, text, name, role, avatar }) {
   const handleEnter = (e) => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.3)' }
@@ -30,9 +33,47 @@ function FeedbackCard({ stars, text, name, role, avatar }) {
   )
 }
 
+const feedbacks = [
+  { stars: '★★★★★', text: 'Finally understand why price moves. First profitable month after 6 weeks of mentorship.', name: 'Ahmed R.', role: 'Mentorship · Karachi', avatar: '👨' },
+  { stars: '★★★★★', text: 'Live sessions changed everything. Learning more here than months of YouTube.', name: 'Sana M.', role: 'Discord Premium · Lahore', avatar: '👩' },
+  { stars: '★★★★★', text: 'SMC finally clicked. I can spot setups on my own now. Game changer.', name: 'Bilal K.', role: 'Signals · Dubai', avatar: '🧑' },
+  { stars: '★★★★★', text: 'Best investment I made. Went from losing trader to consistent profits in 2 months.', name: 'Usman T.', role: 'Mentorship · Islamabad', avatar: '👨' },
+  { stars: '★★★★★', text: 'The signals are incredibly accurate. Made back my subscription fee in the first week.', name: 'Fatima A.', role: 'Premium Signals · Karachi', avatar: '👩' },
+  { stars: '★★★★★', text: 'Discord community is very active. Always someone to discuss trades with. Love it.', name: 'Hassan M.', role: 'Discord Premium · Peshawar', avatar: '🧑' },
+]
+
+const marqueeFeedbacks = [...feedbacks, ...feedbacks]
+const marqueeTransition = {
+  duration: 25,
+  repeat: Infinity,
+  repeatType: 'loop',
+  ease: 'linear',
+}
+
 export default function Feedback() {
   const width = useWindowSize()
   const isMobile = width < 768
+  const marqueeControls = useAnimationControls()
+  const x = useMotionValue(0)
+  const currentX = useRef(0)
+  const trackedX = useTransform(x, value => value)
+
+  const startAnimation = useCallback(() => {
+    marqueeControls.start({ x: [null, '-50%'], transition: marqueeTransition })
+  }, [marqueeControls])
+
+  useEffect(() => {
+    const unsubscribe = trackedX.on('change', value => {
+      currentX.current = value
+    })
+
+    startAnimation()
+
+    return () => {
+      unsubscribe()
+      marqueeControls.stop()
+    }
+  }, [marqueeControls, startAnimation, trackedX])
 
   return (
     <section id="feedback" style={{
@@ -40,7 +81,8 @@ export default function Feedback() {
       padding: isMobile ? '80px 24px' : '110px 64px',
       background: '#050A08',
     }}>
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <AnimateOnScroll>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <div style={{
           display: 'inline-block',
           background: 'linear-gradient(135deg, rgba(88,220,14,0.12), rgba(120,245,27,0.035))',
@@ -62,15 +104,25 @@ export default function Feedback() {
         <p style={{ color: '#8A9B8D', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto' }}>
           From confused beginners to consistent traders.
         </p>
-      </div>
+        </div>
+      </AnimateOnScroll>
       <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '20px', maxWidth: '1000px', margin: '0 auto',
+        maxWidth: '1100px', margin: '0 auto', overflow: 'hidden',
+        maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
       }}>
-        <FeedbackCard stars="★★★★★" text="Finally understand why price moves. First profitable month after 6 weeks of mentorship." name="Ahmed R." role="Mentorship · Karachi" avatar="👨" />
-        <FeedbackCard stars="★★★★★" text="Live sessions changed everything. Learning more here than months of YouTube." name="Sana M." role="Discord Premium · Lahore" avatar="👩" />
-        <FeedbackCard stars="★★★★★" text="SMC finally clicked. I can spot setups on my own now. Game changer." name="Bilal K." role="Signals · Dubai" avatar="🧑" />
+        <motion.div
+          animate={marqueeControls}
+          onHoverStart={marqueeControls.stop}
+          onHoverEnd={startAnimation}
+          style={{ x, display: 'flex', gap: '16px', width: 'max-content' }}
+        >
+          {marqueeFeedbacks.map((feedback, index) => (
+            <div key={`${feedback.name}-${index}`} style={{ width: '340px', flexShrink: 0 }}>
+              <FeedbackCard {...feedback} />
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )

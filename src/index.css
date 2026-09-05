@@ -20,8 +20,13 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
+@keyframes gentlePulse {
+  0%, 100% { box-shadow: 0 2px 12px rgba(82,216,11,0.28); }
+  50% { box-shadow: 0 2px 24px rgba(82,216,11,0.55); }
+}
+
+.join-btn {
+  animation: gentlePulse 2.5s ease-in-out infinite;
 }
 
 body {

@@ -1,4 +1,12 @@
 import useWindowSize from '../hooks/useWindowSize'
+import AnimateOnScroll from './AnimateOnScroll'
+
+const scrollTo = (id) => {
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 
 export default function Hero({ onShowPerformance }) {
   const width = useWindowSize()
@@ -36,47 +44,54 @@ export default function Hero({ onShowPerformance }) {
       }} />
 
       <div style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{
+        <AnimateOnScroll delay={0.1}>
+          <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
           background: 'linear-gradient(135deg, rgba(88,220,14,0.12), rgba(120,245,27,0.035))',
           border: '1px solid rgba(120,245,27,0.25)', borderRadius: '100px',
           padding: '6px 16px', marginBottom: '28px',
           fontSize: '0.75rem', fontWeight: 600, color: '#9CFF4B',
           letterSpacing: '0.08em', textTransform: 'uppercase',
-        }}>
+          }}>
           <span style={{
             width: '6px', height: '6px', borderRadius: '50%', background: '#79F51B',
             boxShadow: '0 0 14px rgba(120,245,27,0.9)', display: 'inline-block', animation: 'pulse 2s infinite',
           }} />
           Live Community · 500+ Traders
-        </div>
+          </div>
+        </AnimateOnScroll>
 
-        <h1 style={{
+        <AnimateOnScroll delay={0.2}>
+          <h1 style={{
           fontFamily: 'Montserrat, sans-serif', fontWeight: 800,
           fontSize: isMobile ? '2.8rem' : 'clamp(2.9rem, 6vw, 5.25rem)',
           lineHeight: 1.04, letterSpacing: '-0.055em', color: '#fff',
           marginBottom: '22px', textShadow: '0 10px 50px rgba(0,0,0,0.42)',
-        }}>
+          }}>
           Trade Smarter.<br />
           <span style={{
             background: 'linear-gradient(90deg, #B6FF6A 0%, #83F52C 45%, #56D70D 100%)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
           }}>Not Harder.</span>
-        </h1>
+          </h1>
+        </AnimateOnScroll>
 
-        <p style={{
+        <AnimateOnScroll delay={0.3}>
+          <p style={{
           fontSize: isMobile ? '0.95rem' : '1.05rem', color: '#8A9B8D',
           maxWidth: '460px', lineHeight: 1.7, letterSpacing: '-0.008em',
           margin: '0 auto 40px',
-        }}>
+          }}>
           Signals, live sessions, and mentorship — built for traders who are done guessing.
-        </p>
+          </p>
+        </AnimateOnScroll>
 
-        <div style={{
+        <AnimateOnScroll delay={0.4}>
+          <div style={{
           display: 'flex', gap: '12px', justifyContent: 'center',
           flexDirection: isMobile ? 'column' : 'row', alignItems: 'center',
-        }}>
-          <a href="#enroll" style={{
+          }}>
+          <a href="#enroll" onClick={e => { e.preventDefault(); scrollTo('enroll') }} style={{
             display: 'inline-block', textDecoration: 'none',
             padding: '16px 32px', borderRadius: '15px',
             fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: '0.96rem',
@@ -116,7 +131,8 @@ export default function Hero({ onShowPerformance }) {
               e.currentTarget.style.background = 'rgba(255,255,255,0.018)'
             }}
           >View Performance</button>
-        </div>
+          </div>
+        </AnimateOnScroll>
       </div>
       <style>{`@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }`}</style>
     </section>

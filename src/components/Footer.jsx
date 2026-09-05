@@ -1,4 +1,12 @@
 import useWindowSize from '../hooks/useWindowSize'
+import AnimateOnScroll from './AnimateOnScroll'
+
+const scrollTo = (id) => {
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 
 export default function Footer() {
   const width = useWindowSize()
@@ -12,7 +20,8 @@ export default function Footer() {
   const hoverOff = (e) => { e.target.style.color = '#8A9B8D' }
 
   return (
-    <footer style={{
+    <AnimateOnScroll direction="fade">
+      <footer style={{
       padding: isMobile ? '40px 24px' : '40px 64px',
       background: 'rgba(5,5,12,0.65)',
       borderTop: '1px solid rgba(255,255,255,0.07)',
@@ -36,16 +45,17 @@ export default function Footer() {
       </div>
 
       <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-        <a href="#community" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Community</a>
-        <a href="#mentorship" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Mentorship</a>
-        <a href="#results" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Results</a>
-        <a href="#feedback" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Reviews</a>
-        <a href="#enroll" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Join</a>
+        <a href="#community" style={linkStyle} onClick={e => { e.preventDefault(); scrollTo('community') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Community</a>
+        <a href="#mentorship" style={linkStyle} onClick={e => { e.preventDefault(); scrollTo('mentorship') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Mentorship</a>
+        <a href="#results" style={linkStyle} onClick={e => { e.preventDefault(); scrollTo('results') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Results</a>
+        <a href="#feedback" style={linkStyle} onClick={e => { e.preventDefault(); scrollTo('feedback') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Reviews</a>
+        <a href="#enroll" style={linkStyle} onClick={e => { e.preventDefault(); scrollTo('enroll') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Join</a>
       </div>
 
       <div style={{ fontSize: '0.75rem', color: '#8A9B8D' }}>
         © 2026 ForexStreet247. Trading involves risk.
       </div>
-    </footer>
+      </footer>
+    </AnimateOnScroll>
   )
 }
