@@ -1,4 +1,5 @@
 import useWindowSize from '../hooks/useWindowSize'
+import AnimateOnScroll from './AnimateOnScroll'
 
 export default function Stats() {
   const width = useWindowSize()
@@ -31,22 +32,30 @@ export default function Stats() {
         gap: isMobile ? '32px' : '0',
         alignItems: 'center', justifyItems: 'center',
       }}>
-        <div style={{ textAlign: 'center' }}>
+        <AnimateOnScroll delay={0.1}>
+          <div style={{ textAlign: 'center' }}>
           <div style={statNum}>500+</div>
           <div style={statLabel}>Active Members</div>
-        </div>
-        <div style={{ textAlign: 'center' }}>
+          </div>
+        </AnimateOnScroll>
+        <AnimateOnScroll delay={0.2}>
+          <div style={{ textAlign: 'center' }}>
           <div style={statNum}>84%</div>
           <div style={statLabel}>Signal Accuracy</div>
-        </div>
-        <div style={{ textAlign: 'center' }}>
+          </div>
+        </AnimateOnScroll>
+        <AnimateOnScroll delay={0.3}>
+          <div style={{ textAlign: 'center' }}>
           <div style={statNum}>4 yrs</div>
           <div style={statLabel}>Market Experience</div>
-        </div>
-        <div style={{ textAlign: 'center' }}>
+          </div>
+        </AnimateOnScroll>
+        <AnimateOnScroll delay={0.4}>
+          <div style={{ textAlign: 'center' }}>
           <div style={statNum}>Daily</div>
           <div style={statLabel}>Live Sessions</div>
-        </div>
+          </div>
+        </AnimateOnScroll>
       </div>
     </section>
   )

@@ -1,4 +1,5 @@
 import useWindowSize from '../hooks/useWindowSize'
+import AnimateOnScroll from './AnimateOnScroll'
 
 function ResultCard({ month, pct }) {
   const handleEnter = (e) => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.34)'; e.currentTarget.style.transform = 'translateY(-3px)' }
@@ -28,7 +29,8 @@ export default function Results({ onShowPerformance }) {
       padding: isMobile ? '80px 24px' : '110px 64px',
       background: `radial-gradient(circle at 15% 15%, rgba(82,216,11,0.055), transparent 30%), #07100B`,
     }}>
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <AnimateOnScroll>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <div style={{
           display: 'inline-block',
           background: 'linear-gradient(135deg, rgba(88,220,14,0.12), rgba(120,245,27,0.035))',
@@ -50,16 +52,17 @@ export default function Results({ onShowPerformance }) {
         <p style={{ color: '#8A9B8D', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '400px', margin: '0 auto' }}>
           Verified monthly returns from live trading — no edits, no cherry picking.
         </p>
-      </div>
+        </div>
+      </AnimateOnScroll>
 
       <div style={{
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
         gap: '20px', maxWidth: '900px', margin: '0 auto 48px',
       }}>
-        <ResultCard month="January 2026" pct="+18.4%" />
-        <ResultCard month="February 2026" pct="+22.1%" />
-        <ResultCard month="March 2026" pct="+14.7%" />
+        <AnimateOnScroll delay={0.1}><ResultCard month="January 2026" pct="+18.4%" /></AnimateOnScroll>
+        <AnimateOnScroll delay={0.2}><ResultCard month="February 2026" pct="+22.1%" /></AnimateOnScroll>
+        <AnimateOnScroll delay={0.3}><ResultCard month="March 2026" pct="+14.7%" /></AnimateOnScroll>
       </div>
 
       <div style={{ textAlign: 'center' }}>
