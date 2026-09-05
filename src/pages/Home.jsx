@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ScrollProgress from '../components/ScrollProgress'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Stats from '../components/Stats'
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <main>
+      <ScrollProgress />
       <Navbar />
       <Hero onShowPerformance={() => setShowPerf(true)} />
       <Stats />
