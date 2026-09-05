@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useWindowSize from '../hooks/useWindowSize'
+import AnimateOnScroll from './AnimateOnScroll'
 
 function MonthCard({ month, pct, trades, wins }) {
   const handleEnter = (e) => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.34)'; e.currentTarget.style.transform = 'translateY(-3px)' }
@@ -81,7 +82,8 @@ export default function PerformancePage({ onBack }) {
         onMouseLeave={e => { e.currentTarget.style.color = '#8A9B8D' }}
       >{'←'} Back to Home</button>
 
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <AnimateOnScroll>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <div style={{
           display: 'inline-block',
           background: 'linear-gradient(135deg, rgba(88,220,14,0.12), rgba(120,245,27,0.035))',
@@ -103,7 +105,8 @@ export default function PerformancePage({ onBack }) {
         <p style={{ color: '#8A9B8D', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '380px', margin: '0 auto' }}>
           Every month. Every trade. No filters.
         </p>
-      </div>
+        </div>
+      </AnimateOnScroll>
 
       <div style={{
         display: 'flex', gap: '8px', justifyContent: 'center',
@@ -120,10 +123,10 @@ export default function PerformancePage({ onBack }) {
           gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(220px, 1fr))',
           gap: '20px', maxWidth: '1000px', margin: '0 auto',
         }}>
-          <MonthCard month="January 2026" pct="+18.4%" trades="32" wins="26" />
-          <MonthCard month="February 2026" pct="+22.1%" trades="28" wins="24" />
-          <MonthCard month="March 2026" pct="+14.7%" trades="35" wins="29" />
-          <MonthCard month="April 2026" pct="+19.3%" trades="30" wins="25" />
+          <AnimateOnScroll delay={0.1}><MonthCard month="January 2026" pct="+18.4%" trades="32" wins="26" /></AnimateOnScroll>
+          <AnimateOnScroll delay={0.2}><MonthCard month="February 2026" pct="+22.1%" trades="28" wins="24" /></AnimateOnScroll>
+          <AnimateOnScroll delay={0.3}><MonthCard month="March 2026" pct="+14.7%" trades="35" wins="29" /></AnimateOnScroll>
+          <AnimateOnScroll delay={0.4}><MonthCard month="April 2026" pct="+19.3%" trades="30" wins="25" /></AnimateOnScroll>
         </div>
       )}
 
@@ -133,9 +136,9 @@ export default function PerformancePage({ onBack }) {
           gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '20px', maxWidth: '1000px', margin: '0 auto',
         }}>
-          <LiveCard pair="XAUUSD Long" rr="+3.2R" date="Live Session · 14 Aug 2026" />
-          <LiveCard pair="EURUSD Short" rr="+2.8R" date="Live Session · 10 Aug 2026" />
-          <LiveCard pair="GBPUSD Long" rr="+4.1R" date="Live Session · 5 Aug 2026" />
+          <AnimateOnScroll delay={0.1}><LiveCard pair="XAUUSD Long" rr="+3.2R" date="Live Session · 14 Aug 2026" /></AnimateOnScroll>
+          <AnimateOnScroll delay={0.2}><LiveCard pair="EURUSD Short" rr="+2.8R" date="Live Session · 10 Aug 2026" /></AnimateOnScroll>
+          <AnimateOnScroll delay={0.3}><LiveCard pair="GBPUSD Long" rr="+4.1R" date="Live Session · 5 Aug 2026" /></AnimateOnScroll>
         </div>
       )}
     </div>

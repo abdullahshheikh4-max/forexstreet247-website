@@ -1,4 +1,12 @@
 import useWindowSize from '../hooks/useWindowSize'
+import AnimateOnScroll from './AnimateOnScroll'
+
+const scrollTo = (id) => {
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 
 function CurriculumItem({ num, text, border }) {
   return (
@@ -29,7 +37,8 @@ export default function Mentorship() {
         gap: isMobile ? '48px' : '80px',
         alignItems: 'center',
       }}>
-        <div>
+        <AnimateOnScroll direction="left">
+          <div>
           <div style={{
             display: 'inline-block',
             background: 'linear-gradient(135deg, rgba(88,220,14,0.12), rgba(120,245,27,0.035))',
@@ -51,7 +60,7 @@ export default function Mentorship() {
           <p style={{ color: '#8A9B8D', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '400px', marginBottom: '36px' }}>
             A structured path from zero to independent trader — no fluff, no filler.
           </p>
-          <a href="#enroll" style={{
+          <a href="#enroll" onClick={e => { e.preventDefault(); scrollTo('enroll') }} style={{
             display: 'inline-block', textDecoration: 'none', padding: '14px 28px',
             borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontWeight: 700,
             fontSize: '0.9rem', color: '#071006',
@@ -62,9 +71,11 @@ export default function Mentorship() {
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 36px rgba(82,216,11,0.38)' }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(82,216,11,0.25)' }}
           >Enroll Now {'→'}</a>
-        </div>
+          </div>
+        </AnimateOnScroll>
 
-        <div>
+        <AnimateOnScroll direction="right">
+          <div>
           <p style={{ fontSize: '0.72rem', color: '#8A9B8D', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '20px' }}>Curriculum</p>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             <CurriculumItem num="01" text="Forex Basics & Market Structure" border />
@@ -74,7 +85,8 @@ export default function Mentorship() {
             <CurriculumItem num="05" text="Risk Management & Psychology" border />
             <CurriculumItem num="06" text="Live Trade Reviews & Feedback" />
           </ul>
-        </div>
+          </div>
+        </AnimateOnScroll>
       </div>
     </section>
   )

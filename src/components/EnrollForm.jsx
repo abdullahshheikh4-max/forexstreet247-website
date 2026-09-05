@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useWindowSize from '../hooks/useWindowSize'
+import AnimateOnScroll from './AnimateOnScroll'
 
 export default function EnrollForm() {
   const [service, setService] = useState('')
@@ -72,7 +73,8 @@ export default function EnrollForm() {
       background: `radial-gradient(circle at 50% 0%, rgba(82,216,11,0.095), transparent 38%), rgba(8,17,11,0.94)`,
       borderTop: '1px solid rgba(120,245,27,0.08)',
     }}>
-      <div style={{ maxWidth: '520px', margin: '0 auto', textAlign: 'center' }}>
+      <AnimateOnScroll>
+        <div style={{ maxWidth: '520px', margin: '0 auto', textAlign: 'center' }}>
         <div style={{
           display: 'inline-block',
           background: 'linear-gradient(135deg, rgba(88,220,14,0.12), rgba(120,245,27,0.035))',
@@ -181,7 +183,8 @@ export default function EnrollForm() {
           </button>
 
         </div>
-      </div>
+        </div>
+      </AnimateOnScroll>
     </section>
   )
 }

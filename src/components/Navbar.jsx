@@ -1,9 +1,17 @@
 import { useState, useEffect } from 'react'
 import useWindowSize from '../hooks/useWindowSize'
 
+const scrollTo = (id) => {
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
   const width = useWindowSize()
   const isMobile = width < 768
 
@@ -13,18 +21,37 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const hoverOn = (e) => { e.target.style.color = '#C8FF85' }
-  const hoverOff = (e) => { e.target.style.color = '#7A8C7D' }
+  useEffect(() => {
+    const sections = ['stats', 'community', 'mentorship', 'results', 'feedback']
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { threshold: 0.4 },
+    )
 
-  const linkStyle = {
-    color: '#7A8C7D',
+    sections.forEach(id => {
+      const section = document.getElementById(id)
+      if (section) observer.observe(section)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const hoverOn = (e) => { e.target.style.color = '#C8FF85' }
+  const hoverOff = (e) => { e.target.style.color = activeSection === e.currentTarget.hash.slice(1) ? '#C8FF85' : '#7A8C7D' }
+
+  const linkStyle = (id) => ({
+    color: activeSection === id ? '#C8FF85' : '#7A8C7D',
     fontSize: isMobile ? '1rem' : '0.82rem',
     textDecoration: 'none',
-    fontWeight: 500,
+    fontWeight: activeSection === id ? 600 : 500,
     letterSpacing: '0.06em',
     textTransform: 'uppercase',
     transition: 'color 0.2s ease',
-  }
+  })
 
   const joinStyle = {
     color: '#071006',
@@ -97,13 +124,13 @@ export default function Navbar() {
         {/* Desktop Links */}
         {!isMobile && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
-            <a href="#stats" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Stats</a>
-            <a href="#community" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Community</a>
-            <a href="#mentorship" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Mentorship</a>
-            <a href="#results" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Results</a>
-            <a href="#feedback" style={linkStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Reviews</a>
+            <a href="#stats" style={linkStyle('stats')} onClick={e => { e.preventDefault(); scrollTo('stats') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Stats</a>
+            <a href="#community" style={linkStyle('community')} onClick={e => { e.preventDefault(); scrollTo('community') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Community</a>
+            <a href="#mentorship" style={linkStyle('mentorship')} onClick={e => { e.preventDefault(); scrollTo('mentorship') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Mentorship</a>
+            <a href="#results" style={linkStyle('results')} onClick={e => { e.preventDefault(); scrollTo('results') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Results</a>
+            <a href="#feedback" style={linkStyle('feedback')} onClick={e => { e.preventDefault(); scrollTo('feedback') }} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>Reviews</a>
             <div style={{ width: '1px', height: '18px', background: 'rgba(120,245,27,0.12)' }} />
-            <a href="#enroll" style={joinStyle}
+            <a href="#enroll" className="join-btn" style={joinStyle} onClick={e => { e.preventDefault(); scrollTo('enroll') }}
               onMouseEnter={e => {
                 e.currentTarget.style.background = 'linear-gradient(135deg, #BDFF78 0%, #82F228 60%, #5AD80C 100%)'
                 e.currentTarget.style.transform = 'translateY(-1px)'
@@ -153,12 +180,12 @@ export default function Navbar() {
           flexDirection: 'column',
           gap: '20px',
         }}>
-          <a href="#stats" style={linkStyle} onClick={() => setMenuOpen(false)}>Stats</a>
-          <a href="#community" style={linkStyle} onClick={() => setMenuOpen(false)}>Community</a>
-          <a href="#mentorship" style={linkStyle} onClick={() => setMenuOpen(false)}>Mentorship</a>
-          <a href="#results" style={linkStyle} onClick={() => setMenuOpen(false)}>Results</a>
-          <a href="#feedback" style={linkStyle} onClick={() => setMenuOpen(false)}>Reviews</a>
-          <a href="#enroll" style={{ ...joinStyle, justifyContent: 'center' }} onClick={() => setMenuOpen(false)}>
+          <a href="#stats" style={linkStyle('stats')} onClick={e => { e.preventDefault(); scrollTo('stats'); setMenuOpen(false) }}>Stats</a>
+          <a href="#community" style={linkStyle('community')} onClick={e => { e.preventDefault(); scrollTo('community'); setMenuOpen(false) }}>Community</a>
+          <a href="#mentorship" style={linkStyle('mentorship')} onClick={e => { e.preventDefault(); scrollTo('mentorship'); setMenuOpen(false) }}>Mentorship</a>
+          <a href="#results" style={linkStyle('results')} onClick={e => { e.preventDefault(); scrollTo('results'); setMenuOpen(false) }}>Results</a>
+          <a href="#feedback" style={linkStyle('feedback')} onClick={e => { e.preventDefault(); scrollTo('feedback'); setMenuOpen(false) }}>Reviews</a>
+          <a href="#enroll" className="join-btn" style={{ ...joinStyle, justifyContent: 'center' }} onClick={e => { e.preventDefault(); scrollTo('enroll'); setMenuOpen(false) }}>
             Join {'→'}
           </a>
         </div>
