@@ -72,16 +72,6 @@ export default function PerformancePage({ onBack }) {
       background: `radial-gradient(circle at 50% -8%, rgba(83,216,11,0.10), transparent 35%), linear-gradient(135deg, #07140D 0%, #050A08 48%, #020403 100%)`,
       padding: isMobile ? '100px 24px 60px' : '120px 64px 80px',
     }}>
-      <button onClick={onBack} style={{
-        display: 'flex', alignItems: 'center', gap: '8px',
-        color: '#8A9B8D', fontSize: '0.85rem', cursor: 'pointer',
-        background: 'none', border: 'none', fontFamily: 'Inter, sans-serif',
-        marginBottom: '48px', transition: 'color 0.2s ease', padding: 0,
-      }}
-        onMouseEnter={e => { e.currentTarget.style.color = '#9CFF4B' }}
-        onMouseLeave={e => { e.currentTarget.style.color = '#8A9B8D' }}
-      >{'←'} Back to Home</button>
-
       <AnimateOnScroll>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <div style={{
@@ -141,6 +131,15 @@ export default function PerformancePage({ onBack }) {
           <AnimateOnScroll delay={0.3}><LiveCard pair="GBPUSD Long" rr="+4.1R" date="Live Session · 5 Aug 2026" /></AnimateOnScroll>
         </div>
       )}
+
+      <div style={{ maxWidth: '1100px', margin: '60px auto 0', padding: isMobile ? '40px 24px 40px' : '0 0 40px' }}>
+        <button
+          onClick={onBack}
+          style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#8A9B8D', fontSize: '0.85rem', cursor: 'pointer', background: 'none', border: '1px solid rgba(120,245,27,0.15)', borderRadius: '8px', padding: '10px 18px', fontFamily: 'Inter, sans-serif', transition: 'all 0.2s ease' }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.45)'; e.currentTarget.style.color = '#9CFF4B' }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.15)'; e.currentTarget.style.color = '#8A9B8D' }}
+        >{'←'} Back to Home</button>
+      </div>
     </div>
   )
 }

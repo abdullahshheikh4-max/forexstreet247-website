@@ -82,7 +82,7 @@ export default function Hero({ onShowPerformance }) {
           maxWidth: '460px', lineHeight: 1.7, letterSpacing: '-0.008em',
           margin: '0 auto 40px',
           }}>
-          Signals, live sessions, and mentorship — built for traders who are done guessing.
+          Signals, live sessions, and mentorship, built for traders who are done guessing.
           </p>
         </AnimateOnScroll>
 

@@ -1,5 +1,6 @@
 import useWindowSize from '../hooks/useWindowSize'
 import AnimateOnScroll from './AnimateOnScroll'
+import { Link } from 'react-router-dom'
 
 function ServiceCard({ card }) {
   const handleEnter = (e) => {
@@ -14,11 +15,13 @@ function ServiceCard({ card }) {
   }
 
   return (
-    <div onMouseEnter={handleEnter} onMouseLeave={handleLeave} style={{
+    <Link to={card.path} onMouseEnter={handleEnter} onMouseLeave={handleLeave} style={{
+      gridColumn: card.featured && !card.isMobile ? 'span 1' : undefined,
+      display: 'flex', flexDirection: 'column',
       background: 'linear-gradient(145deg, rgba(120,245,27,0.035), rgba(255,255,255,0.012)), rgba(9,19,13,0.86)',
       border: '1px solid rgba(120,245,27,0.10)', borderRadius: '22px',
-      padding: '32px 28px', backdropFilter: 'blur(12px)',
-      boxShadow: '0 16px 50px rgba(0,0,0,0.20)', transition: 'all 0.25s ease', cursor: 'default',
+      padding: card.featured ? '36px 32px' : '26px 24px', backdropFilter: 'blur(12px)',
+      boxShadow: '0 16px 50px rgba(0,0,0,0.20)', transition: 'all 0.25s ease', cursor: 'pointer', textDecoration: 'none',
     }}>
       <div style={{
         width: '48px', height: '48px', borderRadius: '10px',
@@ -33,19 +36,17 @@ function ServiceCard({ card }) {
       }}>{card.title}</div>
       <p style={{ fontSize: '0.875rem', color: '#8A9B8D', lineHeight: 1.65, marginBottom: '20px' }}>{card.desc}</p>
       <span style={{
-        display: 'inline-block', background: 'rgba(82,216,11,0.085)',
-        border: '1px solid rgba(120,245,27,0.20)', borderRadius: '6px',
-        padding: '4px 12px', fontSize: '0.72rem', color: '#9CFF4B', fontWeight: 600,
-      }}>{card.tag}</span>
-    </div>
+        display: 'inline-block', alignSelf: 'flex-start', marginTop: 'auto', background: 'transparent',
+        border: '1px solid rgba(120,245,27,0.35)', borderRadius: '8px',
+        padding: '9px 14px', fontSize: '0.78rem', color: '#9CFF4B', fontWeight: 600,
+      }}>Learn More {'→'}</span>
+    </Link>
   )
 }
 
 const cards = [
-  { icon: '📈', title: 'Live Trading', desc: 'Real trades. Real time. Watch every entry and exit with full commentary.', tag: 'Daily' },
-  { icon: '📡', title: 'Premium Signals', desc: 'Forex and crypto signals with precise entry, SL, and TP levels.', tag: 'Forex · Crypto' },
-  { icon: '💬', title: 'Discord Community', desc: 'Private server with signal alerts, market bias, and direct mentor access.', tag: 'Premium Access' },
-  { icon: '🎓', title: '1-on-1 Mentorship', desc: 'Personalized SMC coaching from basics to full trading independence.', tag: 'Structured Course' },
+  { icon: '📡', title: 'Premium Monthly Membership', desc: 'Daily live trading, market analysis, and practical trading education inside the Premium Community.', path: '/premium', featured: true },
+  { icon: '🎓', title: '1-on-1 Mentorship', desc: 'Personalized guidance, private calls, and direct support built around your real trading journey.', path: '/mentorship-program', featured: true },
 ]
 
 export default function Services() {
@@ -79,18 +80,18 @@ export default function Services() {
           }}>One Community</span>
         </h2>
         <p style={{ color: '#8A9B8D', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '420px', margin: '0 auto' }}>
-          Everything you need to go from confused to consistent — in one place.
+          Everything you need to go from confused to consistent, in one place.
         </p>
         </div>
       </AnimateOnScroll>
       <div style={{
         display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(260px, 1fr))',
+        gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, minmax(0, 1fr))',
         gap: '20px', maxWidth: '1100px', margin: '0 auto',
       }}>
         {cards.map((card, index) => (
           <AnimateOnScroll key={card.title} delay={0.1 * (index + 1)}>
-            <ServiceCard card={card} />
+            <ServiceCard card={{ ...card, isMobile }} />
           </AnimateOnScroll>
         ))}
       </div>

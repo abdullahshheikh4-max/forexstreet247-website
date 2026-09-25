@@ -58,7 +58,7 @@ export default function Mentorship() {
             }}>The Right Way.</span>
           </h2>
           <p style={{ color: '#8A9B8D', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '400px', marginBottom: '36px' }}>
-            A structured path from zero to independent trader — no fluff, no filler.
+            A structured path from zero to independent trader, with no fluff or filler.
           </p>
           <a href="#enroll" onClick={e => { e.preventDefault(); scrollTo('enroll') }} style={{
             display: 'inline-block', textDecoration: 'none', padding: '14px 28px',
@@ -79,7 +79,7 @@ export default function Mentorship() {
           <p style={{ fontSize: '0.72rem', color: '#8A9B8D', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '20px' }}>Curriculum</p>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             <CurriculumItem num="01" text="Forex Basics & Market Structure" border />
-            <CurriculumItem num="02" text="Smart Money Concepts — Core" border />
+            <CurriculumItem num="02" text="Smart Money Concepts · Core" border />
             <CurriculumItem num="03" text="Order Blocks, FVGs & Liquidity" border />
             <CurriculumItem num="04" text="Multi-Timeframe Analysis" border />
             <CurriculumItem num="05" text="Risk Management & Psychology" border />

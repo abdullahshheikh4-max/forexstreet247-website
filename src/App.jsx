@@ -1,6 +1,9 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import AboutPage from './pages/AboutPage'
+import PremiumPage from './pages/PremiumPage'
+import MentorshipPage from './pages/MentorshipPage'
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
 
@@ -28,7 +31,10 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    const savedPosition = sessionStorage.getItem('homeScrollPosition')
+    if (!savedPosition) {
+      window.scrollTo(0, 0)
+    }
   }, [])
 
   useEffect(() => {
@@ -60,6 +66,9 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/premium" element={<PremiumPage />} />
+        <Route path="/mentorship-program" element={<MentorshipPage />} />
       </Routes>
     </BrowserRouter>
   )

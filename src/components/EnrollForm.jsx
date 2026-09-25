@@ -27,7 +27,7 @@ export default function EnrollForm() {
     // Send email via Web3Forms
     const formData = new FormData()
     formData.append('access_key', '3ab62d81-13c5-4c3f-a537-27c9f923996a')
-    formData.append('subject', `New Enrollment — ${service}`)
+    formData.append('subject', `New Enrollment: ${service}`)
     formData.append('message',
       `New enrollment received.\n\nName: ${name}\nWhatsApp: ${phone}\nService: ${service}\n\nPlease verify payment and add the student.`
     )
@@ -96,7 +96,7 @@ export default function EnrollForm() {
         </h2>
 
         <p style={{ color: '#8A9B8D', fontSize: '0.92rem', lineHeight: 1.7, marginBottom: '40px' }}>
-          Fill in your details — payment instructions appear after.
+          Fill in your details. Payment instructions appear after.
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', textAlign: 'left' }}>

@@ -50,7 +50,7 @@ export default function Results({ onShowPerformance }) {
           }}>Lie.</span>
         </h2>
         <p style={{ color: '#8A9B8D', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '400px', margin: '0 auto' }}>
-          Verified monthly returns from live trading — no edits, no cherry picking.
+          Verified monthly returns from live trading, with no edits or cherry picking.
         </p>
         </div>
       </AnimateOnScroll>
