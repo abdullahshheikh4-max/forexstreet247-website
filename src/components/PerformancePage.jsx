@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import useWindowSize from '../hooks/useWindowSize'
 import AnimateOnScroll from './AnimateOnScroll'
+import ScrollProgress from './ScrollProgress'
 
 function MonthCard({ month, pct, trades, wins }) {
   const handleEnter = (e) => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.34)'; e.currentTarget.style.transform = 'translateY(-3px)' }
@@ -51,10 +52,21 @@ function LiveCard({ pair, rr, date }) {
   )
 }
 
-export default function PerformancePage({ onBack }) {
+export default function PerformancePage({ onBack, lenisRef }) {
   const [activeTab, setActiveTab] = useState('monthly')
   const width = useWindowSize()
   const isMobile = width < 768
+
+  useLayoutEffect(() => {
+    const scrollToTop = () => {
+      lenisRef.current?.scrollTo(0, { immediate: true, force: true })
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+
+    scrollToTop()
+    const frameId = requestAnimationFrame(scrollToTop)
+    return () => cancelAnimationFrame(frameId)
+  }, [lenisRef])
 
   const tabStyle = (tab) => ({
     padding: '9px 22px', borderRadius: '8px', fontSize: '0.82rem',
@@ -72,6 +84,7 @@ export default function PerformancePage({ onBack }) {
       background: `radial-gradient(circle at 50% -8%, rgba(83,216,11,0.10), transparent 35%), linear-gradient(135deg, #07140D 0%, #050A08 48%, #020403 100%)`,
       padding: isMobile ? '100px 24px 60px' : '120px 64px 80px',
     }}>
+      <ScrollProgress />
       <AnimateOnScroll>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <div style={{

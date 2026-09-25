@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useEffect, useLayoutEffect, useRef } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import AboutPage from './pages/AboutPage'
 import PremiumPage from './pages/PremiumPage'
@@ -7,14 +7,37 @@ import MentorshipPage from './pages/MentorshipPage'
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
 
+function ScrollToTop({ lenisRef }) {
+  const { pathname } = useLocation()
+
+  useLayoutEffect(() => {
+    const scrollToTop = () => {
+      lenisRef.current?.scrollTo(0, { immediate: true, force: true })
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+
+    scrollToTop()
+    const frameId = requestAnimationFrame(scrollToTop)
+    return () => cancelAnimationFrame(frameId)
+  }, [lenisRef, pathname])
+
+  return null
+}
+
 export default function App() {
+  const lenisRef = useRef(null)
+
   useEffect(() => {
     let lenis
     const timeout = setTimeout(() => {
       lenis = new Lenis({
-        duration: 1.4,
+        duration: 1.8,
+        lerp: 0.04,
+        wheelMultiplier: 0.45,
+        touchMultiplier: 0.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       })
+      lenisRef.current = lenis
 
       function raf(time) {
         lenis.raf(time)
@@ -27,13 +50,7 @@ export default function App() {
     return () => {
       clearTimeout(timeout)
       lenis?.destroy()
-    }
-  }, [])
-
-  useEffect(() => {
-    const savedPosition = sessionStorage.getItem('homeScrollPosition')
-    if (!savedPosition) {
-      window.scrollTo(0, 0)
+      lenisRef.current = null
     }
   }, [])
 
@@ -64,8 +81,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop lenisRef={lenisRef} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home lenisRef={lenisRef} />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/premium" element={<PremiumPage />} />
         <Route path="/mentorship-program" element={<MentorshipPage />} />
