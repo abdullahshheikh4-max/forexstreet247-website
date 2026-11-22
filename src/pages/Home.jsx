@@ -589,7 +589,7 @@ function SocialLinks() {
     { icon: '🎮', label: 'Discord Server', sub: '10k+ members', href: 'http://discord.gg/forexstreet247' },
     { icon: '▶️', label: 'YouTube', sub: 'Free sessions & live trading', href: 'https://www.youtube.com/@wallstreet247' },
     { icon: '💬', label: 'WhatsApp Channel', sub: 'Free market guidance & learning', href: '#' },
-    { icon: '💬', label: 'WhatsApp Support', sub: 'Help from our team', href: 'https://wa.me/923172490120' },
+    { icon: '💬', label: 'WhatsApp Support', sub: 'Help from our team', href: 'https://wa.me/00000000' },
   ]
 
   const cardBase = {
