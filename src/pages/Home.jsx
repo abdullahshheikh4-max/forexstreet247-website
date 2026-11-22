@@ -348,7 +348,7 @@ function Steps() {
         <div style={{ marginTop: '16px', color: '#8A9B8D', fontSize: '0.85rem', lineHeight: 1.9 }}>
           <p style={{ marginBottom: '16px' }}>After completing Steps 1 & 2, submit your details to gain VIP access via either:</p>
           <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-            <a href="https://wa.me/923172490120" target="_blank" rel="noreferrer" style={{
+            <a href="https://wa.me/00000000" target="_blank" rel="noreferrer" style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px',
               padding: '10px 20px', borderRadius: '10px',
               fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: '0.84rem',
