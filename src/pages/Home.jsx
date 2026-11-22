@@ -509,7 +509,7 @@ function SocialProof() {
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.35)' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.12)' }}
           >
-            <img src="/src/assets/image12.png" alt="VIP trades posted live" style={{ width: '100%', display: 'block', borderRadius: '16px 16px 0 0' }} />
+            <img src="/src/assets/image 12.png" alt="VIP trades posted live" style={{ width: '100%', display: 'block', borderRadius: '16px 16px 0 0' }} />
             <div style={{ padding: '14px 18px', fontSize: '0.78rem', color: '#8A9B8D' }}>
               💚 VIP trade results shared live in the community
             </div>
@@ -523,7 +523,7 @@ function SocialProof() {
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.35)' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(120,245,27,0.12)' }}
           >
-            <img src="/src/assets/image13.png" alt="XAUUSD live trade result" style={{ width: '100%', display: 'block', borderRadius: '16px 16px 0 0' }} />
+            <img src="/src/assets/image 13.png" alt="XAUUSD live trade result" style={{ width: '100%', display: 'block', borderRadius: '16px 16px 0 0' }} />
             <div style={{ padding: '14px 18px', fontSize: '0.78rem', color: '#8A9B8D' }}>
               🎯 XAUUSD +230 PIPS — shared 15 mins before NY open, executed on live session
             </div>
