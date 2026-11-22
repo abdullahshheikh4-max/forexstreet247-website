@@ -241,7 +241,7 @@ function AlternativeJoin({ isMobile }) {
           After submitting payment, gain VIP access via:
         </div>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          <a href="https://wa.me/923172490120" target="_blank" rel="noreferrer" style={{
+          <a href="https://wa.me/0000000000" target="_blank" rel="noreferrer" style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
             padding: '10px 20px', borderRadius: '10px',
             fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: '0.84rem',
@@ -446,7 +446,7 @@ function Steps() {
             <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#fff', marginBottom: '4px' }}>Need help?</div>
             <div style={{ fontSize: '0.84rem', color: '#8A9B8D' }}>Our team helps with referral changes, VIP access and Zoom approval.</div>
           </div>
-          <a href="https://wa.me/923172490120" target="_blank" rel="noreferrer" style={{
+          <a href="https://wa.me/0000000" target="_blank" rel="noreferrer" style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
             padding: '12px 24px', borderRadius: '10px',
             fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: '0.88rem',
