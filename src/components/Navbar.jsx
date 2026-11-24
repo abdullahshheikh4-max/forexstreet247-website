@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
 
-const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+const scrollTo = (id) => {
+  const el = document.getElementById(id)
+  if (!el) return
+  const top = el.getBoundingClientRect().top + window.scrollY
+  window.scrollTo({ top, behavior: 'smooth' })
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -39,13 +44,11 @@ export default function Navbar() {
         }}>FOREXSTREET247</span>
       </div>
 
-      {/* Join button */}
-      <a
-        href="https://discord.gg/forexstreet247"
-        target="_blank"
-        rel="noreferrer"
+      {/* Join VIP button */}
+      <button
+        onClick={() => scrollTo('steps')}
         style={{
-          color: '#071006', fontSize: '0.82rem', textDecoration: 'none',
+          color: '#071006', fontSize: '0.82rem',
           fontWeight: 700, padding: '9px 22px', borderRadius: '10px',
           background: 'linear-gradient(135deg, #AAFF55 0%, #6EE815 60%, #4FCB0A 100%)',
           border: '1px solid rgba(200,255,140,0.40)',
@@ -53,13 +56,13 @@ export default function Navbar() {
           letterSpacing: '0.04em', textTransform: 'uppercase',
           display: 'inline-flex', alignItems: 'center', gap: '7px',
           whiteSpace: 'nowrap', animation: 'gentlePulse 2.5s ease-in-out infinite',
-          transition: 'all 0.2s ease',
+          transition: 'all 0.2s ease', cursor: 'pointer',
         }}
         onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)' }}
         onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)' }}
       >
-        Join <span style={{ fontWeight: 900 }}>→</span>
-      </a>
+        Join VIP <span style={{ fontWeight: 900 }}>→</span>
+      </button>
     </nav>
   )
 }

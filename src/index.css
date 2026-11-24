@@ -14,6 +14,15 @@
   --muted:      #6B8050;
 }
 
+html {
+  scroll-behavior: auto;
+}
+
+@font-face {
+  font-family: 'Alaska';
+  src: url('./fonts/Alaska.woff2') format('woff2');
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -38,4 +47,48 @@ body {
 
 h1, h2, h3 {
   font-family: 'Montserrat', sans-serif;
+}
+
+/* ─── Custom Scrollbar ─────────────────────────────────────────────────────── */
+
+/* Width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(5, 10, 8, 0.95);
+  border-left: 1px solid rgba(120, 245, 27, 0.06);
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(120, 245, 27, 0.15) 0%,
+    rgba(82, 216, 11, 0.50) 50%,
+    rgba(120, 245, 27, 0.15) 100%
+  );
+  border-radius: 100px;
+  border: 1px solid rgba(120, 245, 27, 0.20);
+  transition: background 0.2s ease;
+}
+
+/* Thumb hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(120, 245, 27, 0.30) 0%,
+    rgba(82, 216, 11, 0.80) 50%,
+    rgba(120, 245, 27, 0.30) 100%
+  );
+  border-color: rgba(120, 245, 27, 0.50);
+  box-shadow: 0 0 8px rgba(120, 245, 27, 0.30);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(82, 216, 11, 0.45) rgba(5, 10, 8, 0.95);
 }
