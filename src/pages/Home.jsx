@@ -464,7 +464,6 @@ function Steps() {
       sub: <span>Deposit/transfer <strong style={{ color: '#E2EAE2' }}>$250</strong> for trading activity criteria.</span>,
       content: (
         <div style={{ marginTop: '16px', color: '#8A9B8D', fontSize: '0.85rem', lineHeight: 1.9 }}>
-          Deposit/transfer <strong style={{ color: '#E2EAE2' }}>$250</strong> for trading activity criteria.<br />
           Maintain <strong style={{ color: '#E2EAE2' }}>0.30+ total traded lot per week</strong>.
         </div>
       ),
